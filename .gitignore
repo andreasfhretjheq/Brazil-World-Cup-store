@@ -6,8 +6,10 @@
 **/.env.*
 !**/.env.example
 
-# Banco SQLite
+# Banco SQLite (WAL gera arquivos -shm e -wal em runtime)
 *.db
+*.db-shm
+*.db-wal
 *.sqlite
 *.sqlite3
 **/app.db
