@@ -2,7 +2,7 @@
 
 E-commerce tema Copa do Mundo 2026, focado em camisa do Brasil. Stack:
 
-- **Backend**: FastAPI + SQLAlchemy + SQLite, integração Pix via Asaas.
+- **Backend**: Node 20 + Express + better-sqlite3, integração Pix via Asaas.
 - **Frontend**: React + Vite + TypeScript + Tailwind.
 - **Autenticação**: JWT com senhas em bcrypt.
 
@@ -13,8 +13,8 @@ E-commerce tema Copa do Mundo 2026, focado em camisa do Brasil. Stack:
 ```bash
 cd backend
 cp .env.example .env          # preencher ASAAS_API_KEY
-poetry install
-poetry run fastapi dev app/main.py
+npm install
+npm run dev
 ```
 
 API sobe em http://localhost:8000 e o banco SQLite fica em `backend/app.db`
@@ -45,21 +45,35 @@ Frontend sobe em http://localhost:5173.
 
 ```
 backend/
-  app/
-    main.py        rotas FastAPI + bootstrap (migração leve + seed)
-    auth.py        JWT + bcrypt
-    payments.py    integração Asaas (Pix)
-    models.py      ORM SQLAlchemy
-    schemas.py     Pydantic
-    seed.py        catálogo inicial (idempotente)
-    database.py    engine + session
+  src/
+    index.js           Express bootstrap (schema + seed + rotas)
+    db.js              better-sqlite3 + schema
+    auth.js            JWT + bcrypt + middleware
+    payments.js        integração Asaas (Pix)
+    seed.js            catálogo inicial (idempotente)
+    routes/
+      auth.js          /auth/register, /auth/login, /auth/me
+      products.js      /products
+      cart.js          /cart
+      orders.js        /orders (cria cobrança Pix no POST)
+      payments.js      /payments/webhook
+  Dockerfile           imagem pra Fly.io (compila better-sqlite3)
 frontend/
   src/
-    pages/         Home, Products, ProductDetail, Cart, Checkout, Orders, Login, Register
-    context/       AuthContext, CartContext
-    components/    Navbar, Footer, ProductCard
-    api.ts         cliente axios + tipos
+    pages/             Home, Products, ProductDetail, Cart, Checkout, Orders, Login, Register
+    context/           AuthContext, CartContext
+    components/        Navbar, Footer, ProductCard
+    api.ts             cliente axios + tipos
 ```
+
+## Deploy
+
+- **Backend (Fly.io)**: o Dockerfile inclui tudo o que a Fly precisa. Basta
+  `fly launch` no diretório `backend/` e configurar o secret `ASAAS_API_KEY`.
+  Volume em `/data` pro SQLite sobreviver a redeploys.
+- **Frontend (Vercel/Netlify/Cloudflare Pages)**: `npm run build` na pasta
+  `frontend/` gera `dist/` pronto pra publicar em qualquer CDN estática.
+  Setar `VITE_API_URL` apontando pro backend.
 
 ## Observações
 
