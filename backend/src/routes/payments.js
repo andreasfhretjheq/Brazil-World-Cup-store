@@ -4,8 +4,8 @@
  */
 import { Router } from "express";
 
-import { db } from "../db.js";
-import { interpretarWebhook } from "../payments.js";
+import { db } from "../database/connection.js";
+import { interpretarWebhook } from "../services/payments.js";
 
 export const rotaPagamentos = Router();
 

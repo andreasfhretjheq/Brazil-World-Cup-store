@@ -4,9 +4,9 @@
  */
 import { Router } from "express";
 
-import { exigirAuth } from "../auth.js";
-import { db } from "../db.js";
-import { consultarStatus, criarCobrancaPix } from "../payments.js";
+import { exigirAuth } from "../services/auth.js";
+import { db } from "../database/connection.js";
+import { consultarStatus, criarCobrancaPix } from "../services/payments.js";
 
 export const rotaPedidos = Router();
 rotaPedidos.use(exigirAuth);

@@ -7,7 +7,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { db } from "./db.js";
+import { db } from "../database/connection.js";
 
 const SEGREDO = process.env.JWT_SECRET || "worldcup2026-brasil-hexa-secret-key-change-me";
 // Token vale uma semana — curto o bastante pra mitigar risco em caso de vazamento,

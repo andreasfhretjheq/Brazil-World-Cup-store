@@ -3,7 +3,7 @@
  */
 import { Router } from "express";
 
-import { db } from "../db.js";
+import { db } from "../database/connection.js";
 
 export const rotaProdutos = Router();
 

@@ -6,8 +6,8 @@
  */
 import { Router } from "express";
 
-import { exigirAuth } from "../auth.js";
-import { db } from "../db.js";
+import { exigirAuth } from "../services/auth.js";
+import { db } from "../database/connection.js";
 
 export const rotaCarrinho = Router();
 rotaCarrinho.use(exigirAuth);
