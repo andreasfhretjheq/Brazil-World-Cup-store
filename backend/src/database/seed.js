@@ -5,7 +5,7 @@
  * `popularCatalogo` roda em toda inicialização mas só toca no banco
  * quando realmente há diferença, então é barato chamá-la sempre.
  */
-import { db } from "./db.js";
+import { db } from "./connection.js";
 
 export const PRODUTOS_INICIAIS = [
   {

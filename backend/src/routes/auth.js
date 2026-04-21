@@ -3,8 +3,8 @@
  */
 import { Router } from "express";
 
-import { conferirSenha, exigirAuth, gerarToken, hashSenha } from "../auth.js";
-import { db } from "../db.js";
+import { conferirSenha, exigirAuth, gerarToken, hashSenha } from "../services/auth.js";
+import { db } from "../database/connection.js";
 
 export const rotaAuth = Router();
 

@@ -7,8 +7,8 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 
-import { inicializarSchema } from "./db.js";
-import { popularCatalogo } from "./seed.js";
+import { inicializarSchema } from "./database/connection.js";
+import { popularCatalogo } from "./database/seed.js";
 import { rotaAuth } from "./routes/auth.js";
 import { rotaCarrinho } from "./routes/cart.js";
 import { rotaPagamentos } from "./routes/payments.js";
